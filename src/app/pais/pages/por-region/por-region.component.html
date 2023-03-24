@@ -1,0 +1,32 @@
+<h3>
+  Buscar por region <small> region activa {{ regionActiva | titlecase }}</small>
+</h3>
+<hr />
+
+<div class="row">
+  <div class="col">
+    <button
+      *ngFor="let region of regiones"
+      [class]="
+        region === regionActiva
+          ? 'btn btn-primary me-2'
+          : 'btn btn-outline-primary me-2'
+      "
+      (click)="activarRegion(region)"
+    >
+      {{ region | titlecase }}
+    </button>
+  </div>
+
+  <div class="mt-5">
+    <div *ngIf="hayError" class="alert alert-danger">
+        No se encontró nada con el término: {{ regionActiva }}
+      </div>
+  </div>
+  <div *ngIf="!hayError && paises.length > 0" class="row">
+    <div class="col">
+      <app-pais-tabla [paises]="paises"></app-pais-tabla>
+    </div>
+  </div>
+  
+</div>
